@@ -2,6 +2,6 @@ import { Module } from '@nestjs/common';
 import { GoalService } from './goal.service';
 
 @Module({
-  providers: [GoalService]
+  providers: [GoalService],
 })
 export class GoalModule {}

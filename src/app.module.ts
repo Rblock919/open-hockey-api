@@ -3,9 +3,23 @@ import { ConfigModule } from '@nestjs/config';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { TeamModule } from './modules/team/team.module';
+import { SeasonModule } from './modules/season/season.module';
+import { PlayerModule } from './modules/player/player.module';
+import { GoalModule } from './modules/goal/goal.module';
+import { GameModule } from './modules/game/game.module';
+import { AssistModule } from './modules/assist/assist.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true })],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    TeamModule,
+    SeasonModule,
+    PlayerModule,
+    GoalModule,
+    GameModule,
+    AssistModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

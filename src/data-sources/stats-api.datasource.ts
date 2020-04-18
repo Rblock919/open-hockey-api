@@ -1,5 +1,6 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 import { ApolloError } from 'apollo-server-errors';
+import { Response } from 'apollo-server-env';
 
 import { NHLTeam } from '../modules/team/interfaces/team.interface';
 import { NHLVenue } from '../modules/venue/interfaces/venue.interface';
@@ -13,10 +14,9 @@ export class NHLStatsAPI extends RESTDataSource {
     this.baseURL = 'https://statsapi.web.nhl.com/api/v1/';
   }
 
-  // TODO: find type for this response parameter
-  async errorFromResponse(response): Promise<ApolloError> {
+  async errorFromResponse(response: Response): Promise<ApolloError> {
     const message = `${response.status}: ${response.statusText}`;
-    const error = new ApolloError(message, response.status);
+    const error = new ApolloError(message, `${response.status}`);
     error.extensions = {
       ...error.extensions,
       response: {

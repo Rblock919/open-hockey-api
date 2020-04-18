@@ -1,10 +1,14 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
 
+import { Venue } from '../../venue/dto/venue.dto';
+import { Division } from '../../division/dto/division.dto';
+import { Franchise } from '../../franchise/dto/franchise.dto';
+import { Conference } from '../../conference/dto/conference.dto';
 import { NHLTeam } from '../interfaces/team.interface';
-import { NHLDivision } from '../../division/interfaces/division.interface';
-import { NHLVenue } from '../../venue/interfaces/venue.interface';
-import { NHLConference } from '../../conference/interfaces/conference.interface';
-import { NHLFranchise } from '../../franchise/interfaces/franchise.interface';
+// import { NHLFranchise } from '../../franchise/interfaces/franchise.interface';
+// import { NHLConference } from '../../conference/interfaces/conference.interface';
+// import { NHLDivision } from '../../division/interfaces/division.interface';
+// import { NHLVenue } from '../../venue/interfaces/venue.interface';
 
 @ObjectType()
 export class Team implements NHLTeam {
@@ -17,8 +21,8 @@ export class Team implements NHLTeam {
   @Field()
   readonly link: string;
 
-  @Field()
-  readonly venue: NHLVenue;
+  @Field(type => Venue)
+  readonly venue: Venue;
 
   @Field()
   readonly abbreviation: string;
@@ -32,14 +36,14 @@ export class Team implements NHLTeam {
   @Field()
   readonly firstYearOfPlay: string;
 
-  @Field()
-  readonly division: NHLDivision;
+  @Field(type => Division)
+  readonly division: Division;
 
-  @Field()
-  readonly conference: NHLConference;
+  @Field(type => Conference)
+  readonly conference: Conference;
 
-  @Field()
-  readonly franchise: NHLFranchise;
+  @Field(type => Franchise)
+  readonly franchise: Franchise;
 
   @Field()
   readonly shortName: string;

@@ -3,3 +3,24 @@
 
 - add base type with copyright property
 - change date properties from string to date?
+
+Remaining Logical Modules:
+- people (aka player)
+- schedule
+- standings
+  - standing types
+- draft
+- prospects
+- awards
+- stats
+  - stat types
+  - team stats
+- game (finish)
+  - game types
+  - game status
+  - play types?
+  - live feed (+ time ranges)
+    - box score
+    - linescore
+    - content
+- roster? (if used in multiple schema stitches)

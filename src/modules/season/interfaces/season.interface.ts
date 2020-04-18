@@ -1,4 +1,4 @@
-export interface Season {
+export interface NHLSeason {
   seasonId: string;
   regularSeasonStartDate: string;
   regularSeasonEndDate: string;

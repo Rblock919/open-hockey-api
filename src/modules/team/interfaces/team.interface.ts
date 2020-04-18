@@ -20,9 +20,3 @@ export interface NHLTeam {
   franchiseId: number;
   active: boolean;
 }
-
-export interface NHLTimeZone {
-  id: string;
-  offset: number;
-  tz: string;
-}

@@ -1,7 +1,7 @@
-import { NHLTimeZone } from '../../team/interfaces/team.interface';
+import { NHLTimeZone } from '../../team/interfaces/timezone.interface';
 
 export interface NHLVenue {
-  // looks like this doesn't exist for some venues?
+  // looks like some venues dont have a value for this field
   id?: string;
 
   name: string;

@@ -1,5 +1,5 @@
 import { NHLStatsAPI } from './stats-api.datasource';
 
-export interface DataSources {
+export interface HockeyDataSources {
   nhlStatsAPI: NHLStatsAPI;
 }

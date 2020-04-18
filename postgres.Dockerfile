@@ -1,0 +1,5 @@
+FROM postgres as hockey-api-postgres
+EXPOSE 5432
+ENV POSTGRES_USER appUser
+ENV POSTGRES_PASSWORD goCanes
+ENV POSTGRES_DB hockeyAPI

@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  nest:
+    container_name: open-hockey-api
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    networks:
+      - open-hockey-api-network
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+      - '/app/dist'
+    ports:
+      - '3000:3000'
+
+  postgres:
+    container_name: postgresql
+    build:
+      context: .
+      dockerfile: postgres.Dockerfile
+    networks:
+      - open-hockey-api-network
+    # Below is for testing from host machine and not just node container
+#    ports:
+#      - "27017:27017"
+
+networks:
+  open-hockey-api-network:
+    driver: bridge

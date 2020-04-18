@@ -13,6 +13,7 @@ import { RosterModule } from './modules/roster/roster.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { AdminModule } from './modules/admin/admin.module';
 import { UserModule } from './modules/user/user.module';
+import { NHLStatsAPI } from './data-sources/stats-api.datasource';
 
 @Module({
   imports: [
@@ -21,6 +22,11 @@ import { UserModule } from './modules/user/user.module';
     GraphQLModule.forRoot({
       autoSchemaFile: true,
       context: ({ req, res }) => ({ req, res }),
+      dataSources: () => {
+        return {
+          nhlStatsAPI: new NHLStatsAPI(),
+        };
+      },
     }),
     AuthModule.forRoot(process.env.TOKEN_SECRET),
     AdminModule,

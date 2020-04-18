@@ -1,0 +1,3 @@
+- remove postgres now that a suffecient external API has been discovered
+- create interfaces for data from stats-API
+- create exception-filters and decorators

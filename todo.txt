@@ -1,3 +1,5 @@
 - remove postgres now that a suffecient external API has been discovered
-- create interfaces for data from stats-API
-- create exception-filters and decorators
+- continue to create interfaces for data from stats-API
+
+- add base type with copyright property
+- change date properties from string to date?

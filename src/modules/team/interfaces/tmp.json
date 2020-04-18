@@ -1,0 +1,14 @@
+{
+  "season": {
+    "seasonId": "19171918",
+    "regularSeasonStartDate": "1917-12-19",
+    "regularSeasonEndDate": "1918-03-06",
+    "seasonEndDate": "1918-03-30",
+    "numberOfGames": 22,
+    "tiesInUse": true,
+    "olympicsParticipation": false,
+    "conferencesInUse": false,
+    "divisionsInUse": false,
+    "wildCardInUse": false
+  }
+}

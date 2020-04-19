@@ -1,4 +1,4 @@
-FROM node:12-alpine as node
+FROM node:12.14.1-alpine as node
 
 RUN mkdir /app
 WORKDIR /app
@@ -23,5 +23,5 @@ CMD [ "npm", "run", "start:dev" ]
 # Docker Build Command
 # docker build -f dev.Dockerfile -t open-hockey-api-dev .
 
-# Docker Run Command (mounts working directory as volume but avoids mounting host node_modules directory)
+# Docker Run Command (mounts working directory as volume but avoids mounting host node_modules & dist directories)
 # docker run -p 3000:3000 -e PORT=3000 -v "$PWD":/app -v /app/node_modules -v /app/dist open-hockey-api-dev

@@ -13,6 +13,7 @@ export class ApolloExceptionFilter implements GqlExceptionFilter {
     console.log(
       'Apollo Exception caught! Replace this line with sentry error push...'
     );
+
     return exception;
   }
 }

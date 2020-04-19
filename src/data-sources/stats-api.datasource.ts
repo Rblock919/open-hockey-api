@@ -14,15 +14,19 @@ export class NHLStatsAPI extends RESTDataSource {
     this.baseURL = 'https://statsapi.web.nhl.com/api/v1/';
   }
 
-  async errorFromResponse(response: Response): Promise<ApolloError> {
+  protected async errorFromResponse(response: Response): Promise<ApolloError> {
     const message = `${response.status}: ${response.statusText}`;
     const error = new ApolloError(message, `${response.status}`);
+
+    const body = await this.parseBody(response);
+
     error.extensions = {
       ...error.extensions,
       response: {
         url: response.url,
         status: response.status,
         statusText: response.statusText,
+        body,
       },
     };
     return error;
@@ -30,6 +34,7 @@ export class NHLStatsAPI extends RESTDataSource {
 
   // TODO: possibly throw apollo error instead of return null;
   // TODO: find better way to map response back
+  // ^^^>>> maybe method that takes the data and a string for type and throws apollo error if that type doesn't exist and just returns the relevant data
   // TODO: cast responses from these calls?
 
   async getAllTeams(): Promise<NHLTeam[]> {

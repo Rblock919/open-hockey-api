@@ -9,7 +9,10 @@ export class TeamService {
     return dataSources.nhlStatsAPI.getAllTeams();
   }
 
-  async getTeamById(id: string, dataSources: HockeyDataSources): Promise<any> {
+  async getTeamById(
+    id: string,
+    dataSources: HockeyDataSources
+  ): Promise<NHLTeam> {
     return dataSources.nhlStatsAPI.getTeamById(id);
   }
 }

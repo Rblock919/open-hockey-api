@@ -21,7 +21,7 @@ export class TeamResolver {
   async getTeamById(
     @Args('id', { type: () => ID }) id: string,
     @DataSources() dataSources: HockeyDataSources
-  ): Promise<any> {
+  ): Promise<NHLTeam> {
     return this.teamService.getTeamById(id, dataSources);
   }
 }

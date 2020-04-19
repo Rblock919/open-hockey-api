@@ -1,14 +1,34 @@
 {
-  "season": {
-    "seasonId": "19171918",
-    "regularSeasonStartDate": "1917-12-19",
-    "regularSeasonEndDate": "1918-03-06",
-    "seasonEndDate": "1918-03-30",
-    "numberOfGames": 22,
-    "tiesInUse": true,
-    "olympicsParticipation": false,
-    "conferencesInUse": false,
-    "divisionsInUse": false,
-    "wildCardInUse": false
+  "player": {
+    "id": 8475222,
+    "fullName": "Sami Vatanen",
+    "link": "/api/v1/people/8475222",
+    "firstName": "Sami",
+    "lastName": "Vatanen",
+    "primaryNumber": "45",
+    "birthDate": "1991-06-03",
+    "currentAge": 28,
+    "birthCity": "Jyväskylä",
+    "birthCountry": "FIN",
+    "nationality": "FIN",
+    "height": "5' 10\"",
+    "weight": 185,
+    "active": true,
+    "alternateCaptain": false,
+    "captain": false,
+    "rookie": false,
+    "shootsCatches": "R",
+    "rosterStatus": "I",
+    "currentTeam": {
+      "id": 12,
+      "name": "Carolina Hurricanes",
+      "link": "/api/v1/teams/12"
+    },
+    "primaryPosition": {
+      "code": "D",
+      "name": "Defenseman",
+      "type": "Defenseman",
+      "abbreviation": "D"
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { ObjectType, Field, ID } from '@nestjs/graphql';
+import { ObjectType, Field, ID, Int } from '@nestjs/graphql';
 
 import { NHLFranchise } from '../interfaces/franchise.interface';
 
@@ -12,4 +12,16 @@ export class Franchise implements NHLFranchise {
 
   @Field()
   readonly link: string;
+
+  @Field(type => Int, { nullable: true })
+  firstSeasonId?: number;
+
+  @Field(type => Int, { nullable: true })
+  mostRecentTeamId?: number;
+
+  @Field({ nullable: true })
+  locationName?: string;
+
+  @Field(type => Int, { nullable: true })
+  lastSeasonId?: number;
 }

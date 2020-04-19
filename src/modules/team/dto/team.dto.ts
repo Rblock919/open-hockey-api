@@ -46,6 +46,7 @@ export class Team implements NHLTeam {
   @Field(type => Venue)
   readonly venue: Venue;
 
+  // TODO: stitch field so that firstSeasonId, mostRecentTeamId and locationName can be returned
   @Field(type => Franchise)
   readonly franchise: Franchise;
 

@@ -10,11 +10,9 @@
 Remaining Logical Modules:
 - people (aka player) (finish)
 - schedule
-- standings
+- standings (add to team module?)
   - standing types
 - draft
-- prospects
-- awards
 - stats
   - stat types
   - team stats

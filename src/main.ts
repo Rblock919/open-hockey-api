@@ -2,11 +2,14 @@ import { NestFactory } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
 
 import { AppModule } from './app.module';
+import { LogglyLogger } from './modules/logger/logger.service';
 import { ApolloExceptionFilter } from './exception-filters/apollo-exception-filter';
 import { BadRequestExceptionFilter } from './exception-filters/bad-request-exception.filter';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger: new LogglyLogger(),
+  });
 
   // TODO: update cors policy
   app.enableCors();

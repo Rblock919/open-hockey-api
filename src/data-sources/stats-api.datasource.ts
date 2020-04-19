@@ -1,12 +1,13 @@
-import { RESTDataSource } from 'apollo-datasource-rest';
-import { ApolloError } from 'apollo-server-errors';
 import { Response } from 'apollo-server-env';
+import { ApolloError } from 'apollo-server-errors';
+import { RESTDataSource } from 'apollo-datasource-rest';
 
 import { NHLTeam } from '../modules/team/interfaces/team.interface';
 import { NHLVenue } from '../modules/venue/interfaces/venue.interface';
 import { NHLPlayer } from '../modules/player/interfaces/player.interfaces';
 import { NHLSeason } from '../modules/season/interfaces/season.interface';
 import { NHLDivision } from '../modules/division/interfaces/division.interface';
+import { NHLFranchise } from '../modules/franchise/interfaces/franchise.interface';
 import { NHLConference } from '../modules/conference/interfaces/conference.interface';
 import { NHLRosterPlayer } from '../modules/player/interfaces/roster-player.interface';
 import { NHLPlayerPosition } from '../modules/player/interfaces/player-position.interface';
@@ -39,6 +40,7 @@ export class NHLStatsAPI extends RESTDataSource {
   // TODO: find better way to map response back
   // ^^^>>> maybe method that takes the data and a string for type and throws apollo error if that type doesn't exist and just returns the relevant data
   // TODO: cast responses from these calls?
+  // TODO: update id params to be numbers so that calling methods dont have to use string template since it's already being used here
 
   async getAllTeams(): Promise<NHLTeam[]> {
     const data = await this.get('teams');
@@ -109,5 +111,15 @@ export class NHLStatsAPI extends RESTDataSource {
     const data = await this.get<NHLPlayerPosition[]>('positions');
     // pull out the N/A Unkown entry unless I find a use for it
     return data.filter(x => x.abbrev !== 'N/A');
+  }
+
+  async getAllFranchises(): Promise<NHLFranchise[]> {
+    const data = await this.get('franchises');
+    return data.franchises || null;
+  }
+
+  async getFranchiseById(id: string): Promise<NHLFranchise> {
+    const data = await this.get(`franchises/${id}`);
+    return data.franchises[0] || null;
   }
 }

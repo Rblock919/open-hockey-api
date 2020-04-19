@@ -20,6 +20,7 @@ export class Division implements NHLDivision {
   @Field()
   readonly abbreviation: string;
 
+  // TODO: stitch field so that abbreviation, shortName & active fields can be included
   @Field(type => Conference, { nullable: true })
   readonly conference?: Conference;
 

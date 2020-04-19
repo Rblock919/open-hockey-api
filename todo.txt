@@ -5,7 +5,7 @@
 - change date properties from string to date?
 
 Remaining Logical Modules:
-- people (aka player)
+- people (aka player) (finish)
 - schedule
 - standings
   - standing types

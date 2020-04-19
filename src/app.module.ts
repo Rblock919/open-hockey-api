@@ -11,8 +11,6 @@ import { SeasonModule } from './modules/season/season.module';
 import { PlayerModule } from './modules/player/player.module';
 import { GoalModule } from './modules/goal/goal.module';
 import { GameModule } from './modules/game/game.module';
-import { AssistModule } from './modules/assist/assist.module';
-import { RosterModule } from './modules/roster/roster.module';
 import { DivisionModule } from './modules/division/division.module';
 import { VenueModule } from './modules/venue/venue.module';
 import { ConferenceModule } from './modules/conference/conference.module';
@@ -34,8 +32,6 @@ import { ConferenceModule } from './modules/conference/conference.module';
     PlayerModule,
     GoalModule,
     GameModule,
-    AssistModule,
-    RosterModule,
     DivisionModule,
     VenueModule,
     ConferenceModule,

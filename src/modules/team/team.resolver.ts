@@ -1,7 +1,16 @@
-import { Resolver, Query, Args, ID } from '@nestjs/graphql';
+import {
+  Resolver,
+  Query,
+  Args,
+  ID,
+  ResolveField,
+  Parent,
+} from '@nestjs/graphql';
 
 import { Team } from './dto/team.dto';
 import { NHLTeam } from './interfaces/team.interface';
+import { Player } from '../player/dto/player.dto';
+import { NHLPlayer } from '../player/interfaces/player.interfaces';
 import { TeamService } from './team.service';
 import { DataSources } from '../../decorators/datasources.decorator';
 import { HockeyDataSources } from '../../data-sources/datasources.interface';
@@ -23,5 +32,13 @@ export class TeamResolver {
     @DataSources() dataSources: HockeyDataSources
   ): Promise<NHLTeam> {
     return this.teamService.getTeamById(id, dataSources);
+  }
+
+  @ResolveField(returns => [Player], { name: 'roster' })
+  getRosterForTeam(
+    @Parent() team: NHLTeam,
+    @DataSources() dataSources: HockeyDataSources
+  ): Promise<NHLPlayer[]> {
+    return this.teamService.getTeamRoster(`${team.id}`, dataSources);
   }
 }

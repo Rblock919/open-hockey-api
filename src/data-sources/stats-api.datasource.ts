@@ -4,9 +4,12 @@ import { Response } from 'apollo-server-env';
 
 import { NHLTeam } from '../modules/team/interfaces/team.interface';
 import { NHLVenue } from '../modules/venue/interfaces/venue.interface';
+import { NHLPlayer } from '../modules/player/interfaces/player.interfaces';
 import { NHLSeason } from '../modules/season/interfaces/season.interface';
 import { NHLDivision } from '../modules/division/interfaces/division.interface';
 import { NHLConference } from '../modules/conference/interfaces/conference.interface';
+import { NHLRosterPlayer } from '../modules/player/interfaces/roster-player.interface';
+import { NHLPlayerPosition } from '../modules/player/interfaces/player-position.interface';
 
 export class NHLStatsAPI extends RESTDataSource {
   constructor() {
@@ -45,6 +48,11 @@ export class NHLStatsAPI extends RESTDataSource {
   async getTeamById(id: string): Promise<NHLTeam> {
     const data = await this.get(`teams/${id}`);
     return data.teams[0] || null;
+  }
+
+  async getTeamRoster(teamId: string): Promise<NHLRosterPlayer[]> {
+    const data = await this.get(`teams/${teamId}/roster`);
+    return data.roster || null;
   }
 
   async getAllDivisions(): Promise<NHLDivision[]> {
@@ -90,5 +98,16 @@ export class NHLStatsAPI extends RESTDataSource {
   async getCurrentSeason(): Promise<NHLSeason> {
     const data = await this.get('seasons/current');
     return data.seasons[0] || null;
+  }
+
+  async getPlayerById(id: string): Promise<NHLPlayer> {
+    const data = await this.get(`people/${id}`);
+    return data.people[0] || null;
+  }
+
+  async getPlayerPositions(): Promise<NHLPlayerPosition[]> {
+    const data = await this.get<NHLPlayerPosition[]>('positions');
+    // pull out the N/A Unkown entry unless I find a use for it
+    return data.filter(x => x.abbrev !== 'N/A');
   }
 }

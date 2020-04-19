@@ -1,3 +1,6 @@
+import { NHLCurrentTeam } from './current-team.interface';
+import { NHLPrimaryPosition } from './primary-position.interface';
+
 export interface NHLPlayer {
   id: number;
   fullName: string;
@@ -20,17 +23,4 @@ export interface NHLPlayer {
   rosterStatus: string;
   currentTeam: NHLCurrentTeam;
   primaryPosition: NHLPrimaryPosition;
-}
-
-export interface NHLCurrentTeam {
-  id: number;
-  name: string;
-  link: string;
-}
-
-export interface NHLPrimaryPosition {
-  code: string;
-  name: string;
-  type: string;
-  abbreviation: string;
 }

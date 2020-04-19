@@ -19,6 +19,7 @@ async function bootstrap() {
   // TODO: uncomment security headers once tailored for gql dev purposes
   // AppHeaderSecurity(app);
 
-  await app.listen(app.get(ConfigService).get('PORT'));
+  const port = app.get(ConfigService).get('PORT') || 3000;
+  await app.listen(port);
 }
 bootstrap();

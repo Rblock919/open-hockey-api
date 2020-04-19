@@ -1,14 +1,32 @@
 import { Injectable } from '@nestjs/common';
 
+import { NHLTeam } from '../team/interfaces/team.interface';
+// import { TeamService } from '../team/team.service';
+import { NHLPlayer } from './interfaces/player.interfaces';
+import { NHLPlayerPosition } from './interfaces/player-position.interface';
+import { HockeyDataSources } from '../../data-sources/datasources.interface';
+
 @Injectable()
 export class PlayerService {
-  async getPlayers(): Promise<any[]> {
-    return null;
-    // return this.PlayerRepository.find();
+  // constructor(private teamService: TeamService) {}
+
+  async getPlayerById(
+    id: string,
+    dataSources: HockeyDataSources
+  ): Promise<NHLPlayer> {
+    return dataSources.nhlStatsAPI.getPlayerById(id);
   }
 
-  async getPlayerById(id: string): Promise<any> {
-    return null;
-    // return this.PlayerRepository.findOne(id);
+  async getPlayerPositions(
+    dataSources: HockeyDataSources
+  ): Promise<NHLPlayerPosition[]> {
+    return dataSources.nhlStatsAPI.getPlayerPositions();
+  }
+
+  async getCurrentTeam(
+    teamId: string,
+    dataSources: HockeyDataSources
+  ): Promise<NHLTeam> {
+    return dataSources.nhlStatsAPI.getTeamById(teamId);
   }
 }

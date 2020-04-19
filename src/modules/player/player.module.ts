@@ -6,5 +6,6 @@ import { PlayerResolver } from './player.resolver';
 @Module({
   imports: [],
   providers: [PlayerService, PlayerResolver],
+  exports: [PlayerService],
 })
 export class PlayerModule {}

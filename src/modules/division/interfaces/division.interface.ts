@@ -6,8 +6,8 @@ export interface NHLDivision {
   nameShort: string;
   link: string;
   abbreviation: string;
-  // returned on request for division(s)
+
+  // the following two fields are returned on requests for division(s)
   conference?: NHLConference;
-  // returned on request for division(s)
   active?: boolean;
 }

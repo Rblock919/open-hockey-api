@@ -1,15 +1,12 @@
 import { Injectable } from '@nestjs/common';
 
 import { NHLTeam } from '../team/interfaces/team.interface';
-// import { TeamService } from '../team/team.service';
 import { NHLPlayer } from './interfaces/player.interfaces';
 import { NHLPlayerPosition } from './interfaces/player-position.interface';
 import { HockeyDataSources } from '../../data-sources/datasources.interface';
 
 @Injectable()
 export class PlayerService {
-  // constructor(private teamService: TeamService) {}
-
   async getPlayerById(
     id: string,
     dataSources: HockeyDataSources

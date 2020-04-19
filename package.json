@@ -35,6 +35,8 @@
     "apollo-server-express": "^2.12.0",
     "graphql": "^15.0.0",
     "graphql-tools": "^5.0.0",
+    "loggly": "^1.1.1",
+    "node-loggly-bulk": "^2.2.4",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.5.4"

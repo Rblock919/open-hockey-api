@@ -25,6 +25,7 @@ RUN apk --no-cache --update --virtual build-dependencies add \
   && npm install --only=production \
   && apk del build-dependencies
 
+# TODO: set NODE_ENV to be production & test
 ENV PATH /app/node_modules/.bin:$PATH
 
 COPY --from=builder /app/dist ./dist

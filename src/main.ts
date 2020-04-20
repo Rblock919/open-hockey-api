@@ -4,6 +4,7 @@ import * as Sentry from '@sentry/node';
 
 import { AppModule } from './app.module';
 import { LogglyService } from './modules/logger/logger.service';
+import { LoggingInterceptor } from './interceptors/logging.interceptor';
 import { ApolloExceptionFilter } from './exception-filters/apollo-exception-filter';
 import { BadRequestExceptionFilter } from './exception-filters/bad-request-exception.filter';
 import { LogglyExceptionFilter } from './exception-filters/loggly-exception.filter';
@@ -12,7 +13,11 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: false,
   });
-  app.useLogger(new LogglyService(app.get(ConfigService)));
+
+  const configService = app.get(ConfigService);
+  const logglyService = new LogglyService(configService);
+
+  app.useLogger(logglyService);
 
   // TODO: update cors policy
   app.enableCors();
@@ -23,13 +28,15 @@ async function bootstrap() {
     new LogglyExceptionFilter()
   );
 
+  app.useGlobalInterceptors(new LoggingInterceptor(logglyService));
+
   // TODO: uncomment security headers once tailored for gql dev purposes
   // AppHeaderSecurity(app);
 
-  const dsn = app.get(ConfigService).get('SENTRY_DSN');
+  const dsn = configService.get('SENTRY_DSN');
   Sentry.init({ dsn });
 
-  const port = app.get(ConfigService).get('PORT') || 3000;
+  const port = configService.get('PORT') || 3000;
   await app.listen(port);
 }
 bootstrap();

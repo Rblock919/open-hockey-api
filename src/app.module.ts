@@ -18,7 +18,6 @@ import { NHLRecordsAPI } from './data-sources/records-api.datasource';
 import { FranchiseModule } from './modules/franchise/franchise.module';
 import { ProspectModule } from './modules/prospect/prospect.module';
 import { AwardModule } from './modules/award/award.module';
-import { LoggerModule } from './modules/logger/logger.module';
 
 @Module({
   imports: [
@@ -43,7 +42,6 @@ import { LoggerModule } from './modules/logger/logger.module';
     FranchiseModule,
     ProspectModule,
     AwardModule,
-    LoggerModule,
   ],
   controllers: [],
   providers: [

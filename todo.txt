@@ -8,6 +8,8 @@
 - add base type with copyright property
 - change date properties from string to date?
 
+- move most global classes and services into a core module instead of importing directly into app module
+
 Remaining Logical Modules:
 - people (aka player) (finish)
 - schedule

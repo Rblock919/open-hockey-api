@@ -14,6 +14,8 @@ export class ApolloExceptionFilter implements GqlExceptionFilter {
       'Apollo Exception caught! Replace this line with loggly error push...'
     );
 
+    // TODO: see if it's possible to report to sentry unless it's a 404
+
     return exception;
   }
 }

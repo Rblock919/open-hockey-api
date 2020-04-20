@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { Logger, Injectable, Scope } from '@nestjs/common';
 import * as loggly from 'node-loggly-bulk';
 
-import { LogglyException } from '../../exceptions/loggly.exception';
+import { LogglyException } from './exceptions/loggly.exception';
 
 interface LoggingClient {
   log(obj: any, cb: Function): any;
@@ -16,6 +16,13 @@ enum LogLevel {
   DEBUG = 'debug',
   VERBOSE = 'verbose',
 }
+
+// TODO: test using the winston way again with version 2.4.0 for winston
+
+/* Links:
+  https://www.loggly.com/blog/logging-transpiled-environments-using-newer-javascript-language-constructs/
+  https://github.com/loggly/winston-loggly-bulk/issues/32
+*/
 
 @Injectable({ scope: Scope.TRANSIENT })
 export class LogglyService extends Logger {
@@ -45,6 +52,7 @@ export class LogglyService extends Logger {
   private async logToLoggly(level: LogLevel, data: string): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       const logObj = { level, data };
+      // TODO: use async/await + try-catch instead of callback
       this.client.log(logObj, (err, result) => {
         if (err) {
           return reject(err);
@@ -53,8 +61,8 @@ export class LogglyService extends Logger {
           return resolve(true);
         }
         return reject(
-          new LogglyException(
-            `Loggly Error; Response Code is not 'ok'\nResponse: ${result.response}`
+          new Error(
+            `Response Code is not === 'ok'\nResponse: ${result.response}`
           )
         );
       });

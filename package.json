@@ -29,6 +29,8 @@
     "@nestjs/core": "^7.0.0",
     "@nestjs/graphql": "^7.3.1",
     "@nestjs/platform-express": "^7.0.0",
+    "@sentry/minimal": "^5.15.4",
+    "@sentry/node": "^5.15.4",
     "apollo-datasource-rest": "^0.8.1",
     "apollo-server-env": "^2.4.3",
     "apollo-server-errors": "^2.4.1",

@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
+import * as Sentry from '@sentry/node';
 
 import { AppModule } from './app.module';
 import { LogglyService } from './modules/logger/logger.service';
@@ -17,13 +18,16 @@ async function bootstrap() {
   app.enableCors();
 
   app.useGlobalFilters(
-    new ApolloExceptionFilter(app.get(ConfigService)),
+    new ApolloExceptionFilter(),
     new BadRequestExceptionFilter(),
     new LogglyExceptionFilter()
   );
 
   // TODO: uncomment security headers once tailored for gql dev purposes
   // AppHeaderSecurity(app);
+
+  const dsn = app.get(ConfigService).get('SENTRY_DSN');
+  Sentry.init({ dsn });
 
   const port = app.get(ConfigService).get('PORT') || 3000;
   await app.listen(port);

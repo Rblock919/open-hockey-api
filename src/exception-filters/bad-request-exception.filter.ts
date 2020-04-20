@@ -9,7 +9,7 @@ export class BadRequestExceptionFilter implements GqlExceptionFilter {
     // const gqlHost = GqlArgumentsHost.create(host);
 
     console.log(
-      'Bad Request Exception caught! Replace this line with sentry error push...'
+      'Bad Request Exception caught! Replace this line with loggly error push...'
     );
 
     // Since BadRequestExceptions are of type HttpException we know the structure of the response object

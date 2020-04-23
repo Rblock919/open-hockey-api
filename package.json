@@ -20,7 +20,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand alsdfj;lasjdfl;ajksdl;fjasl;dfjkal;skdjfl;askjdfl;kjasdl;fkjasdl;fkjas;ldkfja;sldkfjasl;dfj;lkj",
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
@@ -47,7 +47,7 @@
     "@nestjs/cli": "^7.0.0",
     "@nestjs/schematics": "^7.0.0",
     "@nestjs/testing": "^7.0.0",
-    "@rblock919/eslint-config": "^1.1.2",
+    "@rblock919/eslint-config": "^1.1.6",
     "@types/express": "^4.17.3",
     "@types/jest": "25.1.4",
     "@types/mongoose": "^5.7.7",

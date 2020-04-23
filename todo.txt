@@ -1,10 +1,6 @@
 - continue to create interfaces for data from stats-API
 ^^>> specifically all the different types from using modifiers on team & game api calls
 
-- add loggly for logging
-^> create interceptor for logging interactions with application
-- add sentry for error reporting
-
 - add base type with copyright property
 - change date properties from string to date?
 

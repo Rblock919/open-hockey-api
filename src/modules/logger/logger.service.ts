@@ -37,9 +37,9 @@ export class LogglyService extends Logger {
   });
 
   private async submitLog(level: LogLevel, data: string): Promise<boolean> {
-    const env = this.configService.get<string>('NODE_ENV');
+    const env = this.configService.get<string>('NODE_ENV') === 'production';
     console.log('submitting log...');
-    if (env === 'production') {
+    if (env === true) {
       try {
         return await this.logToLoggly(level, data);
       } catch (error) {

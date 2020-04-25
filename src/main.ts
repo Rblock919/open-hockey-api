@@ -23,9 +23,9 @@ async function bootstrap() {
   app.enableCors();
 
   app.useGlobalFilters(
-    new ApolloExceptionFilter(),
-    new BadRequestExceptionFilter(),
-    new LogglyExceptionFilter()
+    new ApolloExceptionFilter(configService),
+    new BadRequestExceptionFilter(configService),
+    new LogglyExceptionFilter(configService)
   );
 
   app.useGlobalInterceptors(new LoggingInterceptor(logglyService));

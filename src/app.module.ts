@@ -31,6 +31,7 @@ import { AwardModule } from './modules/award/award.module';
           nhlRecordsAPI: new NHLRecordsAPI(),
         };
       },
+      playground: true,
     }),
     TeamModule,
     SeasonModule,

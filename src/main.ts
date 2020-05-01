@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
 import * as Sentry from '@sentry/node';
+import { RewriteFrames } from '@sentry/integrations';
 
 import { AppModule } from './app.module';
 import { LogglyService } from './modules/logger/logger.service';
@@ -34,7 +35,17 @@ async function bootstrap() {
   // AppHeaderSecurity(app);
 
   const dsn = configService.get('SENTRY_DSN');
-  Sentry.init({ dsn });
+  // TODO: eventually grab these dynamically
+  Sentry.init({
+    dsn,
+    serverName: 'Open-Hockey-Api',
+    release: 'open-hockey-api-0.0.1',
+    integrations: [
+      new RewriteFrames({
+        root: __dirname,
+      }),
+    ],
+  });
 
   const port = configService.get('PORT') || 3000;
   await app.listen(port);

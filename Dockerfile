@@ -1,36 +1,20 @@
-FROM node:12.14.1-alpine as builder
+# <linos> host image
+FROM node:12.14.1-alpine
 
-RUN mkdir /app
+ARG PLATFORM_LEVEL=ENTERPRISE
+ARG NPM_TOKEN
+
 WORKDIR /app
 
-COPY package*.json ./
-
-# Can't run only dev here
-RUN npm install
+RUN npm config set '_auth' "${NPM_TOKEN}"
 
 COPY . .
 
+RUN npm install
 RUN npm run build
+RUN npm prune --production
 
-FROM node:12.14-alpine as node
-
-WORKDIR /app
-
-COPY package*.json ./
-
-RUN apk --no-cache --update --virtual build-dependencies add \
-  python \
-  make \
-  g++ \
-  && npm install --only=production \
-  && apk del build-dependencies
-
-# TODO: set NODE_ENV to be production & test
 ENV PATH /app/node_modules/.bin:$PATH
-
-COPY --from=builder /app/dist ./dist
-
-EXPOSE 3000
 
 CMD ["npm", "run", "start:prod"]
 

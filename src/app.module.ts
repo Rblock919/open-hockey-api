@@ -1,7 +1,5 @@
 import { Module } from '@nestjs/common';
 import { APP_FILTER } from '@nestjs/core';
-import { ConfigModule } from '@nestjs/config';
-import { GraphQLModule } from '@nestjs/graphql';
 
 import { LogglyExceptionFilter } from './exception-filters/loggly-exception.filter';
 import { ApolloExceptionFilter } from './exception-filters/apollo-exception-filter';
@@ -13,26 +11,14 @@ import { GameModule } from './modules/game/game.module';
 import { DivisionModule } from './modules/division/division.module';
 import { VenueModule } from './modules/venue/venue.module';
 import { ConferenceModule } from './modules/conference/conference.module';
-import { NHLStatsAPI } from './data-sources/stats-api.datasource';
-import { NHLRecordsAPI } from './data-sources/records-api.datasource';
 import { FranchiseModule } from './modules/franchise/franchise.module';
 import { ProspectModule } from './modules/prospect/prospect.module';
 import { AwardModule } from './modules/award/award.module';
+import { CoreModule } from './modules/core/core.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
-    GraphQLModule.forRoot({
-      autoSchemaFile: true,
-      context: ({ req, res }) => ({ req, res }),
-      dataSources: () => {
-        return {
-          nhlStatsAPI: new NHLStatsAPI(),
-          nhlRecordsAPI: new NHLRecordsAPI(),
-        };
-      },
-      playground: true,
-    }),
+    CoreModule,
     TeamModule,
     SeasonModule,
     PlayerModule,

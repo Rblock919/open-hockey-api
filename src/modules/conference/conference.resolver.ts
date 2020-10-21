@@ -6,18 +6,18 @@ import { DataSources } from '../../decorators/datasources.decorator';
 import { HockeyDataSources } from '../../data-sources/datasources.interface';
 import { NHLConference } from './interfaces/conference.interface';
 
-@Resolver(of => Conference)
+@Resolver(() => Conference)
 export class ConferenceResolver {
   constructor(private conferenceService: ConferenceService) {}
 
-  @Query(returns => [Conference], { name: 'conferences' })
+  @Query(() => [Conference], { name: 'conferences' })
   async getAllConferences(
     @DataSources() dataSources: HockeyDataSources
   ): Promise<NHLConference[]> {
     return this.conferenceService.getAllConferences(dataSources);
   }
 
-  @Query(returns => Conference, { name: 'conference' })
+  @Query(() => Conference, { name: 'conference' })
   async getConferenceById(
     @Args('id', { type: () => ID }) id: string,
     @DataSources() dataSources: HockeyDataSources

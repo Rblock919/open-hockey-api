@@ -15,18 +15,18 @@ import { TeamService } from './team.service';
 import { DataSources } from '../../decorators/datasources.decorator';
 import { HockeyDataSources } from '../../data-sources/datasources.interface';
 
-@Resolver(of => Team)
+@Resolver(() => Team)
 export class TeamResolver {
   constructor(private teamService: TeamService) {}
 
-  @Query(returns => [Team], { name: 'teams' })
+  @Query(() => [Team], { name: 'teams' })
   async getAllTeams(
     @DataSources() dataSources: HockeyDataSources
   ): Promise<NHLTeam[]> {
     return this.teamService.getAllTeams(dataSources);
   }
 
-  @Query(returns => Team, { name: 'team' })
+  @Query(() => Team, { name: 'team' })
   async getTeamById(
     @Args('id', { type: () => ID }) id: string,
     @DataSources() dataSources: HockeyDataSources
@@ -34,7 +34,7 @@ export class TeamResolver {
     return this.teamService.getTeamById(id, dataSources);
   }
 
-  @ResolveField(returns => [Player], { name: 'roster' })
+  @ResolveField(() => [Player], { name: 'roster' })
   getRosterForTeam(
     @Parent() team: NHLTeam,
     @DataSources() dataSources: HockeyDataSources

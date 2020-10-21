@@ -6,18 +6,18 @@ import { VenueService } from './venue.service';
 import { DataSources } from '../../decorators/datasources.decorator';
 import { HockeyDataSources } from '../../data-sources/datasources.interface';
 
-@Resolver(of => Venue)
+@Resolver(() => Venue)
 export class VenueResolver {
   constructor(private venueService: VenueService) {}
 
-  @Query(returns => [Venue], { name: 'venues' })
+  @Query(() => [Venue], { name: 'venues' })
   async getAllVenues(
     @DataSources() dataSources: HockeyDataSources
   ): Promise<NHLVenue[]> {
     return this.venueService.getAllVenues(dataSources);
   }
 
-  @Query(returns => Venue, { name: 'venue' })
+  @Query(() => Venue, { name: 'venue' })
   async getVenueById(
     @Args('id', { type: () => ID }) id: string,
     @DataSources() dataSources: HockeyDataSources

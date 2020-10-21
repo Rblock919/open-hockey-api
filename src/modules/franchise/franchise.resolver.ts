@@ -6,18 +6,18 @@ import { DataSources } from '../../decorators/datasources.decorator';
 import { NHLFranchise } from './interfaces/franchise.interface';
 import { HockeyDataSources } from '../../data-sources/datasources.interface';
 
-@Resolver(of => Franchise)
+@Resolver(() => Franchise)
 export class FranchiseResolver {
   constructor(private franchiseService: FranchiseService) {}
 
-  @Query(returns => [Franchise], { name: 'franchises' })
+  @Query(() => [Franchise], { name: 'franchises' })
   async getAllFranchises(
     @DataSources() dataSources: HockeyDataSources
   ): Promise<NHLFranchise[]> {
     return this.franchiseService.getAllFranchises(dataSources);
   }
 
-  @Query(returns => Franchise, { name: 'franchise' })
+  @Query(() => Franchise, { name: 'franchise' })
   async getFranchiseById(
     @Args('id', { type: () => ID }) id: string,
     @DataSources() dataSources: HockeyDataSources

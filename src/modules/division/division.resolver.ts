@@ -6,18 +6,18 @@ import { DataSources } from '../../decorators/datasources.decorator';
 import { HockeyDataSources } from '../../data-sources/datasources.interface';
 import { NHLDivision } from './interfaces/division.interface';
 
-@Resolver(of => Division)
+@Resolver(() => Division)
 export class DivisionResolver {
   constructor(private readonly divisionService: DivisionService) {}
 
-  @Query(returns => [Division], { name: 'divisions' })
+  @Query(() => [Division], { name: 'divisions' })
   async getAllDivisions(
     @DataSources() dataSources: HockeyDataSources
   ): Promise<NHLDivision[]> {
     return this.divisionService.getAllDivisions(dataSources);
   }
 
-  @Query(returns => Division, { name: 'division' })
+  @Query(() => Division, { name: 'division' })
   async getDivisionById(
     @Args('id', { type: () => ID }) id: string,
     @DataSources() dataSources: HockeyDataSources

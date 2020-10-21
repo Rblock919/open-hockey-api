@@ -17,11 +17,11 @@ import { HockeyDataSources } from '../../data-sources/datasources.interface';
 import { NHLPlayerPosition } from './interfaces/player-position.interface';
 import { NHLTeam } from '../team/interfaces/team.interface';
 
-@Resolver(of => Player)
+@Resolver(() => Player)
 export class PlayerResolver {
   constructor(private playerService: PlayerService) {}
 
-  @Query(returns => Player, { name: 'player' })
+  @Query(() => Player, { name: 'player' })
   async getPlayerById(
     @Args('id', { type: () => ID }) id: string,
     @DataSources() dataSources: HockeyDataSources
@@ -29,14 +29,14 @@ export class PlayerResolver {
     return this.playerService.getPlayerById(id, dataSources);
   }
 
-  @Query(returns => [PlayerPosition], { name: 'positions' })
+  @Query(() => [PlayerPosition], { name: 'positions' })
   async getPlayerPositions(
     @DataSources() dataSources: HockeyDataSources
   ): Promise<NHLPlayerPosition[]> {
     return this.playerService.getPlayerPositions(dataSources);
   }
 
-  @ResolveField(returns => Team, { name: 'currentTeam' })
+  @ResolveField(() => Team, { name: 'currentTeam' })
   async getCurrentTeam(
     @Parent() player: NHLPlayer,
     @DataSources() dataSources: HockeyDataSources

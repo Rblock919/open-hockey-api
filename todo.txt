@@ -6,6 +6,9 @@
 
 - utilize shared module
 
+- update datasources paradigm
+- update/improve logger-service/module (possibly make shared npm module for nestjs backend projects)
+
 Remaining Logical Modules:
 - people (aka player) (finish)
 - schedule

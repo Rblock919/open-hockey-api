@@ -16,7 +16,6 @@
     "lint": "eslint --fix 'src/**/*.ts'",
     "lint:probe": "eslint --fix-dry-run 'src/**/*.ts'",
     "postinstall": "npm run build",
-    "preinstall": "rm -rf node_modules",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",

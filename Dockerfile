@@ -12,7 +12,7 @@ RUN npm prune --production
 
 ENV PATH /app/node_modules/.bin:$PATH
 
-CMD ["npm", "run", "start:prod"]
+CMD ["npm", "run", "start"]
 
 # Docker Build Command
 # docker build -f Dockerfile -t open-hockey-api .

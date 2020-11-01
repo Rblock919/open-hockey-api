@@ -18,7 +18,7 @@ RUN apk --no-cache --update --virtual build-dependencies add \
 
 EXPOSE 3000
 
-CMD [ "npm", "run", "start:dev" ]
+CMD [ "npm", "run", "start:dev:watch" ]
 
 # Docker Build Command
 # docker build -f dev.Dockerfile -t open-hockey-api-dev .

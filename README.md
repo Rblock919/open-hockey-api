@@ -43,11 +43,11 @@ $ npm run start:prod
 
 ##### Dev
 
-- docker run -p 3000:3000 -v "$PWD":/app -v /app/node_modules -v /app/dist open-hockey-api-dev
+- `docker run -p 3000:3000 -v "$PWD":/app -v /app/node_modules -v /app/dist open-hockey-api-dev`
 
 ##### Prod
 
-- docker run -p 3000:3000 open-hockey-api
+- `docker run -p 3000:3000 open-hockey-api`
 
 ## Test
 

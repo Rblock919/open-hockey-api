@@ -33,7 +33,7 @@ $ npm run start:prod
 
 ##### Dev
 
-- `docker build -f dev.Dockerfile -t open-hockey-api .`
+- `docker build -f dev.Dockerfile -t open-hockey-api-dev .`
 
 ##### Prod
 

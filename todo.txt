@@ -8,6 +8,11 @@
 
 - update datasources paradigm
 
+update README:
+ - make docker commands comment blocks like the rest of the readme
+ - get graphql logo alongside nestjs logo
+ - provide an example query
+
 implement:
  - formatGqlError handler method
  - validateRequiredEnvironmentVars

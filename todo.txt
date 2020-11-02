@@ -13,6 +13,7 @@ implement:
  - validateRequiredEnvironmentVars
  - environment types file
  - configuration strategy
+ - heroku specific postinstall to upload sentry sourcemaps
 
 - find a way to implement subscriptions with live feed updates
 ^> possibly have local open-faas functions query for new data on games and invoke a mutation to trigger subscription

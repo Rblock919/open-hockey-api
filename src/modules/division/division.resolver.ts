@@ -2,8 +2,6 @@ import { Resolver, Query, Args, ID } from '@nestjs/graphql';
 
 import { Division } from './dto/division.dto';
 import { DivisionService } from './division.service';
-import { DataSources } from '../../decorators/datasources.decorator';
-import { HockeyDataSources } from '../../data-sources/datasources.interface';
 import { NHLDivision } from './interfaces/division.interface';
 
 @Resolver(() => Division)
@@ -11,17 +9,14 @@ export class DivisionResolver {
   constructor(private readonly divisionService: DivisionService) {}
 
   @Query(() => [Division], { name: 'divisions' })
-  async getAllDivisions(
-    @DataSources() dataSources: HockeyDataSources
-  ): Promise<NHLDivision[]> {
-    return this.divisionService.getAllDivisions(dataSources);
+  async getAllDivisions(): Promise<NHLDivision[]> {
+    return this.divisionService.getAllDivisions();
   }
 
   @Query(() => Division, { name: 'division' })
   async getDivisionById(
-    @Args('id', { type: () => ID }) id: string,
-    @DataSources() dataSources: HockeyDataSources
+    @Args('id', { type: () => ID }) id: string
   ): Promise<NHLDivision> {
-    return this.divisionService.getDivisionById(id, dataSources);
+    return this.divisionService.getDivisionById(id);
   }
 }

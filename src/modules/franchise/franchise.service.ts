@@ -1,20 +1,17 @@
 import { Injectable } from '@nestjs/common';
 
-import { HockeyDataSources } from '../../data-sources/datasources.interface';
 import { NHLFranchise } from './interfaces/franchise.interface';
+import { DataSourcesService } from '../shared/dataSources.service';
 
 @Injectable()
 export class FranchiseService {
-  async getAllFranchises(
-    dataSources: HockeyDataSources
-  ): Promise<NHLFranchise[]> {
-    return dataSources.nhlStatsAPI.getAllFranchises();
+  constructor(private dataSources: DataSourcesService) {}
+
+  async getAllFranchises(): Promise<NHLFranchise[]> {
+    return this.dataSources.nhlStatsAPI.getAllFranchises();
   }
 
-  async getFranchiseById(
-    id: string,
-    dataSources: HockeyDataSources
-  ): Promise<NHLFranchise> {
-    return dataSources.nhlStatsAPI.getFranchiseById(id);
+  async getFranchiseById(id: string): Promise<NHLFranchise> {
+    return this.dataSources.nhlStatsAPI.getFranchiseById(id);
   }
 }

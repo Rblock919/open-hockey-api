@@ -1,22 +1,21 @@
 import { Injectable } from '@nestjs/common';
 
 import { NHLSeason } from './interfaces/season.interface';
-import { HockeyDataSources } from '../../data-sources/datasources.interface';
+import { DataSourcesService } from '../shared/dataSources.service';
 
 @Injectable()
 export class SeasonService {
-  async getAllSeasons(dataSources: HockeyDataSources): Promise<NHLSeason[]> {
-    return dataSources.nhlStatsAPI.getAllSeasons();
+  constructor(private dataSources: DataSourcesService) {}
+
+  async getAllSeasons(): Promise<NHLSeason[]> {
+    return this.dataSources.nhlStatsAPI.getAllSeasons();
   }
 
-  async getSeasonById(
-    id: string,
-    dataSources: HockeyDataSources
-  ): Promise<NHLSeason> {
-    return dataSources.nhlStatsAPI.getSeasonById(id);
+  async getSeasonById(id: string): Promise<NHLSeason> {
+    return this.dataSources.nhlStatsAPI.getSeasonById(id);
   }
 
-  async getCurrentSeason(dataSources: HockeyDataSources): Promise<NHLSeason> {
-    return dataSources.nhlStatsAPI.getCurrentSeason();
+  async getCurrentSeason(): Promise<NHLSeason> {
+    return this.dataSources.nhlStatsAPI.getCurrentSeason();
   }
 }

@@ -17,14 +17,6 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
 
   const loggerService = await app.resolve(LoggerService);
-  // const loggerService = new LoggerService({
-  //   logLevels: configService.get('logger.logLevels'),
-  //   logglyConfiguration: {
-  //     logglySubdomain: configService.get('logger.logglySubdomain') as string,
-  //     logglyToken: configService.get('logger.logglyToken') as string,
-  //     logglyTags: configService.get('logger.logglyTags') as string[],
-  //   },
-  // });
 
   app.useLogger(loggerService);
 

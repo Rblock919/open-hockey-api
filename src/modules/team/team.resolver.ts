@@ -12,33 +12,25 @@ import { NHLTeam } from './interfaces/team.interface';
 import { Player } from '../player/dto/player.dto';
 import { NHLPlayer } from '../player/interfaces/player.interfaces';
 import { TeamService } from './team.service';
-import { DataSources } from '../../decorators/datasources.decorator';
-import { HockeyDataSources } from '../../data-sources/datasources.interface';
 
 @Resolver(() => Team)
 export class TeamResolver {
   constructor(private teamService: TeamService) {}
 
   @Query(() => [Team], { name: 'teams' })
-  async getAllTeams(
-    @DataSources() dataSources: HockeyDataSources
-  ): Promise<NHLTeam[]> {
-    return this.teamService.getAllTeams(dataSources);
+  async getAllTeams(): Promise<NHLTeam[]> {
+    return this.teamService.getAllTeams();
   }
 
   @Query(() => Team, { name: 'team' })
   async getTeamById(
-    @Args('id', { type: () => ID }) id: string,
-    @DataSources() dataSources: HockeyDataSources
+    @Args('id', { type: () => ID }) id: string
   ): Promise<NHLTeam> {
-    return this.teamService.getTeamById(id, dataSources);
+    return this.teamService.getTeamById(id);
   }
 
   @ResolveField(() => [Player], { name: 'roster' })
-  getRosterForTeam(
-    @Parent() team: NHLTeam,
-    @DataSources() dataSources: HockeyDataSources
-  ): Promise<NHLPlayer[]> {
-    return this.teamService.getTeamRoster(`${team.id}`, dataSources);
+  getRosterForTeam(@Parent() team: NHLTeam): Promise<NHLPlayer[]> {
+    return this.teamService.getTeamRoster(`${team.id}`);
   }
 }

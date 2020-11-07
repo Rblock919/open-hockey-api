@@ -1,18 +1,17 @@
 import { Injectable } from '@nestjs/common';
 
-import { HockeyDataSources } from '../../data-sources/datasources.interface';
 import { NHLVenue } from './interfaces/venue.interface';
+import { DataSourcesService } from '../shared/dataSources.service';
 
 @Injectable()
 export class VenueService {
-  async getAllVenues(dataSources: HockeyDataSources): Promise<NHLVenue[]> {
-    return dataSources.nhlStatsAPI.getAllVenues();
+  constructor(private dataSources: DataSourcesService) {}
+
+  async getAllVenues(): Promise<NHLVenue[]> {
+    return this.dataSources.nhlStatsAPI.getAllVenues();
   }
 
-  async getVenueById(
-    id: string,
-    dataSources: HockeyDataSources
-  ): Promise<NHLVenue> {
-    return dataSources.nhlStatsAPI.getVenueById(id);
+  async getVenueById(id: string): Promise<NHLVenue> {
+    return this.dataSources.nhlStatsAPI.getVenueById(id);
   }
 }

@@ -6,7 +6,7 @@
 
 - utilize shared module
 
-- update datasources paradigm
+- fix tests after adding data sources service
 
 update README:
  - make docker commands comment blocks like the rest of the readme

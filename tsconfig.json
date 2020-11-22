@@ -11,8 +11,11 @@
     "inlineSources": true,
     "sourceRoot": "src",
     "outDir": "./dist",
-    "baseUrl": "./",
-    "incremental": true
+    "baseUrl": "./src",
+    "incremental": true,
+    "paths": {
+      "src/*": ["./*"]
+    }
   },
   "exclude": ["node_modules", "dist"]
 }

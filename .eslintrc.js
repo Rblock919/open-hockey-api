@@ -8,4 +8,14 @@ module.exports = {
     'class-methods-use-this': 'off', // again... occurs quite often in the nestjs framework
     'func-names': 'off', // when defining mongoose schema methods you can't use the arrow function in most cases due to the 'this' usage
   },
+  settings: {
+    'import/resolver': {
+      typescript: {
+        directory: `${__dirname}/tsconfig.json`,
+      },
+      node: {
+        extensions: ['.js', '.ts'],
+      },
+    },
+  },
 };

@@ -3,7 +3,6 @@ import { Injectable } from '@nestjs/common';
 import { NHLTeam } from './interfaces/team.interface';
 import { NHLPlayer } from '../player/interfaces/player.interfaces';
 import { PlayerService } from '../player/player.service';
-import { HockeyDataSources } from '../../data-sources/datasources.interface';
 import { DataSourcesService } from '../shared/dataSources.service';
 
 @Injectable()

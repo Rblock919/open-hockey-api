@@ -26,7 +26,8 @@ export class NHLRecordsAPI extends RESTDataSource {
     return error;
   }
 
+  // TODO: create interfaces around returned type
   async getAttendance(): Promise<any> {
-    return this.get('attendance');
+    return this.get('attendance', undefined, { cacheOptions: { ttl: 60 } });
   }
 }

@@ -12,7 +12,7 @@ Open Source Hockey Api For NHL Statistics
 $ npm install
 ```
 
-## Running the app
+## Running the Application
 
 ### Node
 
@@ -24,30 +24,48 @@ $ npm run start:dev:watch
 $ npm run start:debug
 
 # production mode
-$ npm run start:prod
+$ npm run build && npm run start
 ```
 
 ### Docker
 
-#### Build
+```bash
+# Build
 
-##### Dev
+# dev
+$ docker build -f dev.Dockerfile -t open-hockey-api-dev .
 
-- `docker build -f dev.Dockerfile -t open-hockey-api-dev .`
+# prod
+$ docker build -f Dockerfile -t open-hockey-api .
 
-##### Prod
+# Run
 
-- `docker build -f Dockerfile -t open-hockey-api .`
+# dev
+$ docker run -p 3000:3000 -v "$PWD":/app -v /app/node_modules -v /app/dist open-hockey-api-dev`
 
-#### Run
+# prod
+$ docker run -p 3000:3000 open-hockey-api`
+```
 
-##### Dev
+## Running Dependencies
 
-- `docker run -p 3000:3000 -v "$PWD":/app -v /app/node_modules -v /app/dist open-hockey-api-dev`
+### Redis (Using Docker)
 
-##### Prod
+```bash
+# Run redis
+$ docker run --name open-hockey-api-redis -p 6379:6379 -d redis
 
-- `docker run -p 3000:3000 open-hockey-api`
+# Connect to redis
+$ docker exec -it open-hockey-api-redis sh
+$ redis-cli
+
+# test connection
+$ ping
+# show all keys
+$ keys *
+# monitor activity
+$ monitor
+```
 
 ## Test
 

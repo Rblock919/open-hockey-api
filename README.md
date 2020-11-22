@@ -30,7 +30,7 @@ $ npm run build && npm run start
 ### Docker
 
 ```bash
-# Build
+## Build
 
 # dev
 $ docker build -f dev.Dockerfile -t open-hockey-api-dev .
@@ -38,13 +38,13 @@ $ docker build -f dev.Dockerfile -t open-hockey-api-dev .
 # prod
 $ docker build -f Dockerfile -t open-hockey-api .
 
-# Run
+## Run
 
 # dev
-$ docker run -p 3000:3000 -v "$PWD":/app -v /app/node_modules -v /app/dist open-hockey-api-dev`
+$ docker run -p 3000:3000 -v "$PWD":/app -v /app/node_modules -v /app/dist open-hockey-api-dev
 
 # prod
-$ docker run -p 3000:3000 open-hockey-api`
+$ docker run -p 3000:3000 open-hockey-api
 ```
 
 ## Running Dependencies

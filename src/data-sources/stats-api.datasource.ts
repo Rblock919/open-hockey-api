@@ -2,7 +2,7 @@ import { Response } from 'apollo-server-env';
 import { ApolloError } from 'apollo-server-errors';
 import { RESTDataSource } from 'apollo-datasource-rest';
 
-import { HOUR } from 'src/config/ttl.interface';
+import { ONE_HOUR } from 'src/config/ttl.interface';
 import { NHLTeam } from 'src/modules/team/interfaces/team.interface';
 import { NHLVenue } from 'src/modules/venue/interfaces/venue.interface';
 import { NHLPlayer } from 'src/modules/player/interfaces/player.interfaces';
@@ -12,6 +12,7 @@ import { NHLFranchise } from 'src/modules/franchise/interfaces/franchise.interfa
 import { NHLConference } from 'src/modules/conference/interfaces/conference.interface';
 import { NHLRosterPlayer } from 'src/modules/player/interfaces/roster-player.interface';
 import { NHLPlayerPosition } from 'src/modules/player/interfaces/player-position.interface';
+import { StatsAPIRequestTopics } from './datasources.interface';
 
 export class NHLStatsAPI extends RESTDataSource {
   constructor() {
@@ -37,6 +38,32 @@ export class NHLStatsAPI extends RESTDataSource {
     return error;
   }
 
+  /**
+   * Unfortunately RESTDataSource doesn't expose a great way to invalidate
+   * cache coming from an external API. For example one request may need to
+   * invalidate other and as of 11/21/20 there is not a good way
+   *
+   * References:
+   * https://github.com/apollographql/apollo-server/issues/1562
+   * https://stackoverflow.com/questions/61073879/how-to-invalidate-cache-in-apollo-server-restdatasource
+   *
+   * @example this.deleteCacheForRequest(StatsAPIRequestTopics.TEAMS);
+   * @example this.deleteCacheForRequest(StatsAPIRequestTopics.TEAMS, '12');
+   */
+  deleteCacheForRequest(topic: StatsAPIRequestTopics, id?: string) {
+    const requestUrl = id
+      ? `${this.baseURL}${topic}/${id}`
+      : `${this.baseURL}${topic}`;
+
+    this.memoizedResults.delete(requestUrl);
+    // eslint-disable-next-line
+    // @ts-ignore
+    this.httpCache.keyValueCache.delete(requestUrl);
+
+    // to reset all:
+    // this.httpCache.keyValueCache.store.reset();
+  }
+
   // TODO: find better way to map response back
   // ^^^>>> maybe method that takes the data and a string for type and throws apollo error if that type doesn't exist and just returns the relevant data
 
@@ -48,114 +75,91 @@ export class NHLStatsAPI extends RESTDataSource {
 
   async getAllTeams(): Promise<NHLTeam[]> {
     const data = await this.get('teams', undefined, {
-      cacheOptions: { ttl: HOUR },
+      cacheOptions: { ttl: ONE_HOUR },
     });
-    // for testing
-    // this.deleteCacheForRequest('https://statsapi.web.nhl.com/api/v1/teams/12');
     return data.teams;
-  }
-
-  /**
-   * Unfortunately RESTDataSource doesn't expose a great way to invalidate
-   * cache coming from an external API. For example one request may need to
-   * invalidate other and as of 11/21/20 there is not a good way
-   *
-   * References:
-   * https://github.com/apollographql/apollo-server/issues/1562
-   * https://stackoverflow.com/questions/61073879/how-to-invalidate-cache-in-apollo-server-restdatasource
-   *
-   * @example this.deleteCacheForRequest('https://statsapi.web.nhl.com/api/v1/teams/12');
-   */
-  deleteCacheForRequest(requestUrl: string) {
-    this.memoizedResults.delete(requestUrl);
-    // eslint-disable-next-line
-    // @ts-ignore
-    this.httpCache.keyValueCache.delete(requestUrl);
-
-    // to reset all:
-    // this.httpCache.keyValueCache.store.reset();
   }
 
   async getTeamById(id: string): Promise<NHLTeam> {
     const data = await this.get(`teams/${id}`, undefined, {
-      cacheOptions: { ttl: HOUR },
+      cacheOptions: { ttl: ONE_HOUR },
     });
     return data.teams[0];
   }
 
   async getTeamRoster(teamId: string): Promise<NHLRosterPlayer[]> {
     const data = await this.get(`teams/${teamId}/roster`, undefined, {
-      cacheOptions: { ttl: HOUR },
+      cacheOptions: { ttl: ONE_HOUR },
     });
     return data.roster;
   }
 
   async getAllDivisions(): Promise<NHLDivision[]> {
     const data = await this.get('divisions', undefined, {
-      cacheOptions: { ttl: HOUR },
+      cacheOptions: { ttl: ONE_HOUR },
     });
     return data.divisions;
   }
 
   async getDivisionById(id: string): Promise<NHLDivision> {
     const data = await this.get(`divisions/${id}`, undefined, {
-      cacheOptions: { ttl: HOUR },
+      cacheOptions: { ttl: ONE_HOUR },
     });
     return data.divisions[0];
   }
 
   async getAllVenues(): Promise<NHLVenue[]> {
     const data = await this.get('venues', undefined, {
-      cacheOptions: { ttl: HOUR },
+      cacheOptions: { ttl: ONE_HOUR },
     });
     return data.venues;
   }
 
   async getVenueById(id: string): Promise<NHLVenue> {
     const data = await this.get(`venues/${id}`, undefined, {
-      cacheOptions: { ttl: HOUR },
+      cacheOptions: { ttl: ONE_HOUR },
     });
     return data.venues[0];
   }
 
   async getAllConferences(): Promise<NHLConference[]> {
     const data = await this.get('conferences', undefined, {
-      cacheOptions: { ttl: HOUR },
+      cacheOptions: { ttl: ONE_HOUR },
     });
     return data.conferences;
   }
 
   async getConferenceById(id: string): Promise<NHLConference> {
     const data = await this.get(`conferences/${id}`, undefined, {
-      cacheOptions: { ttl: HOUR },
+      cacheOptions: { ttl: ONE_HOUR },
     });
     return data.conferences[0];
   }
 
   async getAllSeasons(): Promise<NHLSeason[]> {
     const data = await this.get('seasons', undefined, {
-      cacheOptions: { ttl: HOUR },
+      cacheOptions: { ttl: ONE_HOUR },
     });
     return data.seasons;
   }
 
   async getSeasonById(id: string): Promise<NHLSeason> {
     const data = await this.get(`seasons/${id}`, undefined, {
-      cacheOptions: { ttl: HOUR },
+      cacheOptions: { ttl: ONE_HOUR },
     });
     return data.seasons[0];
   }
 
   async getCurrentSeason(): Promise<NHLSeason> {
     const data = await this.get('seasons/current', undefined, {
-      cacheOptions: { ttl: HOUR },
+      cacheOptions: { ttl: ONE_HOUR },
     });
     return data.seasons[0];
   }
 
   async getPlayerById(id: string): Promise<NHLPlayer> {
     const data = await this.get(`people/${id}`, undefined, {
-      cacheOptions: { ttl: HOUR },
+      cacheOptions: { ttl: ONE_HOUR },
     });
     return data.people[0];
   }
@@ -163,7 +167,7 @@ export class NHLStatsAPI extends RESTDataSource {
   async getPlayerPositions(): Promise<NHLPlayerPosition[]> {
     const data =
       (await this.get<NHLPlayerPosition[]>('positions', undefined, {
-        cacheOptions: { ttl: HOUR },
+        cacheOptions: { ttl: ONE_HOUR },
       })) || [];
     // pull out the N/A Unkown entry unless I find a use for it
     return data.filter(x => x.abbrev !== 'N/A');
@@ -171,14 +175,14 @@ export class NHLStatsAPI extends RESTDataSource {
 
   async getAllFranchises(): Promise<NHLFranchise[]> {
     const data = await this.get('franchises', undefined, {
-      cacheOptions: { ttl: HOUR },
+      cacheOptions: { ttl: ONE_HOUR },
     });
     return data.franchises;
   }
 
   async getFranchiseById(id: string): Promise<NHLFranchise> {
     const data = await this.get(`franchises/${id}`, undefined, {
-      cacheOptions: { ttl: HOUR },
+      cacheOptions: { ttl: ONE_HOUR },
     });
     return data.franchises[0];
   }

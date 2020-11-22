@@ -2,7 +2,8 @@ import { Response } from 'apollo-server-env';
 import { ApolloError } from 'apollo-server-errors';
 import { RESTDataSource } from 'apollo-datasource-rest';
 
-import { HOUR } from 'src/config/ttl.interface';
+import { ONE_HOUR } from 'src/config/ttl.interface';
+import { RecordsAPIRequestTopics } from './datasources.interface';
 
 export class NHLRecordsAPI extends RESTDataSource {
   constructor() {
@@ -37,9 +38,13 @@ export class NHLRecordsAPI extends RESTDataSource {
    * https://github.com/apollographql/apollo-server/issues/1562
    * https://stackoverflow.com/questions/61073879/how-to-invalidate-cache-in-apollo-server-restdatasource
    *
-   * @example this.deleteCacheForRequest('https://statsapi.web.nhl.com/api/v1/teams/12');
+   * @example this.deleteCacheForRequest(RecordsAPIRequestTopics.ATTENDANCE);
    */
-  deleteCacheForRequest(requestUrl: string) {
+  deleteCacheForRequest(topic: RecordsAPIRequestTopics, id?: string) {
+    const requestUrl = id
+      ? `${this.baseURL}${topic}/${id}`
+      : `${this.baseURL}${topic}`;
+
     this.memoizedResults.delete(requestUrl);
     // eslint-disable-next-line
     // @ts-ignore
@@ -51,6 +56,8 @@ export class NHLRecordsAPI extends RESTDataSource {
 
   // TODO: create interfaces around returned type
   async getAttendance(): Promise<any> {
-    return this.get('attendance', undefined, { cacheOptions: { ttl: HOUR } });
+    return this.get('attendance', undefined, {
+      cacheOptions: { ttl: ONE_HOUR },
+    });
   }
 }

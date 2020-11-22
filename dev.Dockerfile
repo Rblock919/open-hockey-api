@@ -25,3 +25,12 @@ CMD [ "npm", "run", "start:dev:watch" ]
 
 # Docker Run Command (mounts working directory as volume but avoids mounting host node_modules & dist directories)
 # docker run -p 3000:3000 -v "$PWD":/app -v /app/node_modules -v /app/dist open-hockey-api-dev
+
+# Running redis
+# docker run --name open-hockey-api-redis -p 6379:6379 -d redis
+
+# Connecting to redis container
+# docker exec -it open-hockey-api-redis sh
+# redis-cli
+# ^> test connection --> ping
+# ^> show all keys --> keys *

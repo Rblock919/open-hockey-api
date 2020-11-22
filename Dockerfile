@@ -19,3 +19,12 @@ CMD ["npm", "run", "start"]
 
 # Docker Run Command
 # docker run -p 3000:3000 open-hockey-api
+
+# Running redis
+# docker run --name open-hockey-api-redis -p 6379:6379 -d redis
+
+# Connecting to redis container
+# docker exec -it open-hockey-api-redis sh
+# redis-cli
+# ^> test connection --> ping
+# ^> show all keys --> keys *

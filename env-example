@@ -1,0 +1,16 @@
+# Node config
+PORT=3000
+NODE_ENV=development
+ENVIRONMENT=local
+
+# Loggly Config
+LOGGLY_TOKEN=
+LOGGLY_SUBDOMAIN=
+
+# Sentry Config
+SENTRY_DSN=
+
+# Redis Local
+REDIS_HOST=
+REDIS_PORT=
+REDIS_PASSWORD=

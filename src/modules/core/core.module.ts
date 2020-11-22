@@ -16,7 +16,7 @@ import { configureLogger } from '../../config/configureLogger';
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql',
       introspection: true,
-      tracing: true,
+      tracing: process.env.ENVIRONMENT !== 'production',
       playground: process.env.ENVIRONMENT !== 'production',
       // TODO: create interface for context
       context: ({ req, res }) => ({ req, res }),
@@ -28,7 +28,9 @@ import { configureLogger } from '../../config/configureLogger';
       },
       cache: new RedisCache({
         host: process.env.REDIS_HOST,
-        port: 6379,
+        port: process.env.REDIS_PORT,
+        password: process.env.REDIS_PASSWORD,
+        name: 'open-hockey-api',
       }),
       // TODO: implement formatGqlError w/ sentry integration
     }),

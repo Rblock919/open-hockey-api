@@ -87,6 +87,7 @@ export class NHLStatsAPI extends RESTDataSource {
     return data.teams[0];
   }
 
+  // For some reason getting roster for teamid 11 is broke right now
   async getTeamRoster(teamId: string): Promise<NHLRosterPlayer[]> {
     const data = await this.get(`teams/${teamId}/roster`, undefined, {
       cacheOptions: { ttl: ONE_HOUR },

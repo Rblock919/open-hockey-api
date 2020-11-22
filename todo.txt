@@ -4,9 +4,10 @@
 - add base type with copyright property
 - change date properties from string to date?
 
-- utilize shared module
-
 - fix tests after adding data sources service
+- update readme with instructions for either:
+ - creating .env file before build
+ - passing in required ENV vars to docker build/run command
 
 update README:
  - make docker commands comment blocks like the rest of the readme

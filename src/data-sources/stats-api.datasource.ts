@@ -12,6 +12,10 @@ import { NHLConference } from '../modules/conference/interfaces/conference.inter
 import { NHLRosterPlayer } from '../modules/player/interfaces/roster-player.interface';
 import { NHLPlayerPosition } from '../modules/player/interfaces/player-position.interface';
 
+const HOUR = 3600;
+// const DAY = 86400;
+// const WEEK = 604800;
+
 export class NHLStatsAPI extends RESTDataSource {
   constructor() {
     super();
@@ -43,17 +47,23 @@ export class NHLStatsAPI extends RESTDataSource {
   // TODO: update id params to be numbers so that calling methods dont have to use string template since it's already being used here
 
   async getAllTeams(): Promise<NHLTeam[]> {
-    const data = await this.get('teams');
+    const data = await this.get('teams', undefined, {
+      cacheOptions: { ttl: HOUR },
+    });
     return data.teams || null;
   }
 
   async getTeamById(id: string): Promise<NHLTeam> {
-    const data = await this.get(`teams/${id}`);
+    const data = await this.get(`teams/${id}`, undefined, {
+      cacheOptions: { ttl: HOUR },
+    });
     return data.teams[0] || null;
   }
 
   async getTeamRoster(teamId: string): Promise<NHLRosterPlayer[]> {
-    const data = await this.get(`teams/${teamId}/roster`);
+    const data = await this.get(`teams/${teamId}/roster`, undefined, {
+      cacheOptions: { ttl: HOUR },
+    });
     return data.roster || null;
   }
 
@@ -103,7 +113,9 @@ export class NHLStatsAPI extends RESTDataSource {
   }
 
   async getPlayerById(id: string): Promise<NHLPlayer> {
-    const data = await this.get(`people/${id}`);
+    const data = await this.get(`people/${id}`, undefined, {
+      cacheOptions: { ttl: HOUR },
+    });
     return data.people[0] || null;
   }
 

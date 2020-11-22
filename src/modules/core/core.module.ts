@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
+import { RedisCache } from 'apollo-server-cache-redis';
 
 import { LoggerModule } from '@rblock919/nestjs-logger';
 
@@ -13,8 +14,9 @@ import { configureLogger } from '../../config/configureLogger';
     ConfigModule.forRoot({ isGlobal: true }),
     LoggerModule.forRoot(configureLogger()),
     GraphQLModule.forRoot({
-      autoSchemaFile: true,
+      autoSchemaFile: 'schema.gql',
       introspection: true,
+      tracing: true,
       playground: true, // TODO: pull from env variable
       // TODO: create interface for context
       context: ({ req, res }) => ({ req, res }),
@@ -24,6 +26,10 @@ import { configureLogger } from '../../config/configureLogger';
           nhlRecordsAPI: new NHLRecordsAPI(),
         };
       },
+      cache: new RedisCache({
+        host: '127.0.0.1',
+        port: 6379,
+      }),
       // TODO: implement formatGqlError w/ sentry integration
     }),
   ],

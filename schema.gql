@@ -1,0 +1,142 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type TimeZone {
+  id: ID!
+  offset: Int!
+  tz: String!
+}
+
+type Venue {
+  id: ID
+  name: String!
+  link: String!
+  city: String
+  timeZone: TimeZone
+  appEnabled: Boolean
+}
+
+type PrimaryPosition {
+  code: String!
+  name: String!
+  type: String!
+  abbreviation: String!
+}
+
+type Player {
+  id: ID!
+  fullName: String!
+  link: String!
+  firstName: String!
+  lastName: String!
+  primaryNumber: String!
+  birthDate: String!
+  currentAge: Int!
+  birthCity: String!
+  birthCountry: String!
+  nationality: String!
+  height: String!
+  weight: Int!
+  active: Boolean!
+  alternateCaptain: Boolean!
+  captain: Boolean!
+  rookie: Boolean!
+  shootsCatches: String!
+  rosterStatus: String!
+  primaryPosition: PrimaryPosition!
+  currentTeam: Team!
+}
+
+type Conference {
+  id: ID!
+  name: String!
+  link: String!
+  abbreviation: String
+  shortName: String
+  active: Boolean
+}
+
+type Division {
+  id: ID!
+  name: String!
+  nameShort: String!
+  link: String!
+  abbreviation: String!
+  conference: Conference
+  active: Boolean
+}
+
+type Franchise {
+  franchiseId: ID!
+  teamName: String!
+  link: String!
+  firstSeasonId: Int
+  mostRecentTeamId: Int
+  locationName: String
+  lastSeasonId: Int
+}
+
+type Team {
+  id: ID!
+  name: String!
+  link: String!
+  abbreviation: String!
+  teamName: String!
+  locationName: String!
+  firstYearOfPlay: String!
+  division: Division!
+  conference: Conference!
+  venue: Venue!
+  franchise: Franchise!
+  shortName: String!
+  officialSiteUrl: String!
+  franchiseId: Float!
+  active: Boolean!
+  roster: [Player!]!
+}
+
+type PlayerPosition {
+  abbrev: String!
+  code: String!
+  fullName: String!
+  type: String!
+}
+
+type Season {
+  seasonId: ID!
+  regularSeasonStartDate: String!
+  regularSeasonEndDate: String!
+  seasonEndDate: String!
+  numberOfGames: Int!
+  tiesInUse: Boolean!
+  olympicsParticipation: Boolean!
+  conferencesInUse: Boolean!
+  divisionsInUse: Boolean!
+  wildCardInUse: Boolean!
+}
+
+type Game {
+  id: ID!
+  name: String!
+}
+
+type Query {
+  teams: [Team!]!
+  team(id: ID!): Team!
+  player(id: ID!): Player!
+  positions: [PlayerPosition!]!
+  seasons: [Season!]!
+  season(id: ID!): Season!
+  currentSeason: Season!
+  games: [Game!]!
+  game(id: ID!): Game!
+  divisions: [Division!]!
+  division(id: ID!): Division!
+  venues: [Venue!]!
+  venue(id: ID!): Venue!
+  conferences: [Conference!]!
+  conference(id: ID!): Conference!
+  franchises: [Franchise!]!
+  franchise(id: ID!): Franchise!
+}

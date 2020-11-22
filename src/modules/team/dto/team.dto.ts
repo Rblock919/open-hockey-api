@@ -13,7 +13,7 @@ import { Conference } from '../../conference/dto/conference.dto';
 
 @ObjectType()
 export class Team implements NHLTeam {
-  @Field(type => ID)
+  @Field(() => ID)
   readonly id: number;
 
   @Field()
@@ -35,19 +35,19 @@ export class Team implements NHLTeam {
   readonly firstYearOfPlay: string;
 
   // TODO: stitch field so that conference & active fields can be included
-  @Field(type => Division)
+  @Field(() => Division)
   readonly division: Division;
 
   // TODO: stitch field so that abbreviation, shortName & active fields can be included
-  @Field(type => Conference)
+  @Field(() => Conference)
   readonly conference: Conference;
 
   // TODO: stitch field so that appEnabled can be included as well???
-  @Field(type => Venue)
+  @Field(() => Venue)
   readonly venue: Venue;
 
   // TODO: stitch field so that firstSeasonId, mostRecentTeamId and locationName can be returned
-  @Field(type => Franchise)
+  @Field(() => Franchise)
   readonly franchise: Franchise;
 
   @Field()
@@ -63,7 +63,7 @@ export class Team implements NHLTeam {
   readonly active: boolean;
 
   /* Stitched Fields */
-  @Field(type => [Player])
+  @Field(() => [Player])
   readonly roster: Player[];
 
   /* End of Stitched Fields */

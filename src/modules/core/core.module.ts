@@ -17,7 +17,7 @@ import { configureLogger } from '../../config/configureLogger';
       autoSchemaFile: 'schema.gql',
       introspection: true,
       tracing: true,
-      playground: true, // TODO: pull from env variable
+      playground: process.env.ENVIRONMENT !== 'production',
       // TODO: create interface for context
       context: ({ req, res }) => ({ req, res }),
       dataSources: () => {
@@ -27,7 +27,7 @@ import { configureLogger } from '../../config/configureLogger';
         };
       },
       cache: new RedisCache({
-        host: '127.0.0.1',
+        host: process.env.REDIS_HOST,
         port: 6379,
       }),
       // TODO: implement formatGqlError w/ sentry integration

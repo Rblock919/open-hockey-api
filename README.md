@@ -1,5 +1,7 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
+  <a href='https://www.apollographql.com/'><img src='https://user-images.githubusercontent.com/841294/53402609-b97a2180-39ba-11e9-8100-812bab86357c.png' height='100' alt='Apollo Server'></a>
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" height='100' alt="Nest Logo" /></a>
+  <a href="https://graphql.org/" target="blank"><img src="https://raw.githubusercontent.com/graphql/graphql-spec/a3084aabe16e1a45ab45bb7e67c3cd64640e02e3/resources/GraphQL%20Logo.svg" width="320" height='100' alt="GraphQL Logo" /></a>
 </p>
 
 ## Description
@@ -79,3 +81,17 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+## Deployed Instances
+
+> Note: Both instances running on free-tier of Heroku. Servers may need a minute to spin up if currently idle.
+
+### Dev
+
+- URL: `https://open-hockey-api-dev.herokuapp.com/graphql`
+- Playground Enabled: yes
+
+### Prod
+
+- URL: `https://open-hockey-api.herokuapp.com/graphql`
+- Playground Enabled: no

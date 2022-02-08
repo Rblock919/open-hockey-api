@@ -2,7 +2,7 @@ import { Response } from 'apollo-server-env';
 import { ApolloError } from 'apollo-server-errors';
 import { RESTDataSource } from 'apollo-datasource-rest';
 
-import { ONE_HOUR, ONE_DAY, ONE_MINUTE } from 'src/config/ttl.interface';
+import { ONE_HOUR, ONE_MINUTE } from 'src/config/ttl.interface';
 import { NHLTeam } from 'src/modules/team/interfaces/team.interface';
 import { NHLVenue } from 'src/modules/venue/interfaces/venue.interface';
 import { NHLPlayer } from 'src/modules/player/interfaces/player.interfaces';

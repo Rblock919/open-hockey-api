@@ -11,6 +11,7 @@ import { FranchiseModule } from './modules/franchise/franchise.module';
 import { ProspectModule } from './modules/prospect/prospect.module';
 import { AwardModule } from './modules/award/award.module';
 import { CoreModule } from './modules/core/core.module';
+import { ScheduleModule } from './modules/schedule/schedule.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { CoreModule } from './modules/core/core.module';
     FranchiseModule,
     ProspectModule,
     AwardModule,
+    ScheduleModule,
   ],
   controllers: [],
   providers: [],

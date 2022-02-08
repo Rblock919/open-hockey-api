@@ -2,7 +2,7 @@ import { Response } from 'apollo-server-env';
 import { ApolloError } from 'apollo-server-errors';
 import { RESTDataSource } from 'apollo-datasource-rest';
 
-import { ONE_HOUR } from 'src/config/ttl.interface';
+import { ONE_HOUR, ONE_DAY, ONE_MINUTE } from 'src/config/ttl.interface';
 import { NHLTeam } from 'src/modules/team/interfaces/team.interface';
 import { NHLVenue } from 'src/modules/venue/interfaces/venue.interface';
 import { NHLPlayer } from 'src/modules/player/interfaces/player.interfaces';
@@ -12,6 +12,7 @@ import { NHLFranchise } from 'src/modules/franchise/interfaces/franchise.interfa
 import { NHLConference } from 'src/modules/conference/interfaces/conference.interface';
 import { NHLRosterPlayer } from 'src/modules/player/interfaces/roster-player.interface';
 import { NHLPlayerPosition } from 'src/modules/player/interfaces/player-position.interface';
+import { NHLSchedule } from 'src/modules/schedule/interfaces/schedule.interface';
 import { StatsAPIRequestTopics } from './datasources.interface';
 
 export class NHLStatsAPI extends RESTDataSource {
@@ -186,5 +187,12 @@ export class NHLStatsAPI extends RESTDataSource {
       cacheOptions: { ttl: ONE_HOUR },
     });
     return data.franchises[0];
+  }
+
+  async getSchedule(): Promise<NHLSchedule> {
+    const data = await this.get(`schedule`, undefined, {
+      cacheOptions: { ttl: ONE_MINUTE }, // TODO: figure out better caching strategy due to score
+    });
+    return { dates: data.dates };
   }
 }

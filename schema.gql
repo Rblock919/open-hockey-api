@@ -121,6 +121,71 @@ type Game {
   name: String!
 }
 
+type ScheduleGameStatus {
+  abstractGameState: String!
+  codedGameState: String!
+  detailedState: String!
+  statusCode: String!
+  startTimeTBD: Boolean!
+}
+
+type ScheduledGameTeamRecord {
+  wins: Int!
+  losses: Int!
+  ot: Int!
+  type: String!
+}
+
+type ScheduledGameTeamTeamAttr {
+  id: Int!
+  name: String!
+  link: String!
+}
+
+type ScheduledGameTeamVenueAttr {
+  name: String!
+  link: String!
+}
+
+type ScheduledGameTeamContentAttr {
+  link: String!
+}
+
+type ScheduledGameTeam {
+  leagueRecord: ScheduledGameTeamRecord!
+  score: Int!
+  team: ScheduledGameTeamTeamAttr!
+  venue: ScheduledGameTeamVenueAttr!
+  content: ScheduledGameTeamContentAttr!
+}
+
+type ScheduledGameTeams {
+  home: ScheduledGameTeam!
+  away: ScheduledGameTeam!
+}
+
+type ScheduledGame {
+  gamePk: String!
+  link: String!
+  gameType: String!
+  season: String!
+  gameDate: String!
+  status: ScheduleGameStatus!
+  teams: ScheduledGameTeams!
+}
+
+type ScheduledDate {
+  date: String!
+  totalItems: Int!
+  totalGames: Int!
+  totalMatches: Int!
+  games: [ScheduledGame!]!
+}
+
+type Schedule {
+  dates: [ScheduledDate!]!
+}
+
 type Query {
   teams: [Team!]!
   team(id: ID!): Team!
@@ -139,4 +204,5 @@ type Query {
   conference(id: ID!): Conference!
   franchises: [Franchise!]!
   franchise(id: ID!): Franchise!
+  schedule: Schedule!
 }

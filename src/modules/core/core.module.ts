@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { RedisCache } from 'apollo-server-cache-redis';
+import depthLimit from 'graphql-depth-limit';
 
 import { LoggerModule } from '@rblock919/nestjs-logger';
 
@@ -32,6 +33,7 @@ import { configureLogger } from '../../config/configureLogger';
         password: process.env.REDIS_PASSWORD,
         name: 'open-hockey-api',
       }),
+      validationRules: [depthLimit(3)],
       // TODO: implement formatGqlError w/ sentry integration
     }),
   ],
